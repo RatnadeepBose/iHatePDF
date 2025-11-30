@@ -357,7 +357,7 @@ startOverBtn.onclick = () => {
     // Clear file list
     list.innerHTML = '';
     
-    // Revoke previous blob URL to free memory
+    /// Revoke previous blob URL to free memory
     if (download.href && download.href.startsWith('blob:')) {
         URL.revokeObjectURL(download.href);
     }
