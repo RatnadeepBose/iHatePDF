@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Merge PDF - iHatePDF</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    body{background:#F7F7F7;font-family:Inter;}
+    .drag{background:#FFF1F3;border-color:#E11D48;}
+</style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+<!-- NAV -->
+<nav class="bg-white px-6 py-3 shadow-sm flex justify-between items-center">
+    <a href="index.html"><img src="image.png" class="h-8"></a>
+</nav>
+
+
+<!-- MAIN -->
+<div class="max-w-lg mx-auto text-center mt-12">
+
+    <div class="mb-8">
+        <div class="w-16 h-16 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-object-group text-2xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900">Merge PDF</h1>
+        <p class="text-gray-600 text-sm mt-1">Upload files → Merge → Download instantly</p>
+    </div>
+
+
+    <!-- DROPBOX -->
+    <div id="drop" class="border-2 border-dashed border-gray-300 rounded-lg bg-white p-10 cursor-pointer hover:border-red-400 transition">
+        <input type="file" id="input" accept="application/pdf" multiple class="hidden">
+        <i class="fa-solid fa-cloud-arrow-up text-4xl text-red-500"></i>
+        <p class="text-base font-medium mt-2">Click or Drop your PDF files</p>
+        <p class="text-xs text-gray-400 mt-1">Multiple files allowed</p>
+    </div>
+
+    
+    <!-- FILES -->
+    <div id="list" class="mt-5 space-y-2"></div>
+
+
+    <!-- MERGE BUTTON -->
+    <button id="merge" class="hidden mt-6 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg text-base font-bold shadow-md hover:shadow-xl transition">
+        <i class="fa-solid fa-object-group mr-2"></i>Merge PDFs
+    </button>
+
+
+    <!-- DOWNLOAD SECTION -->
+    <div id="done" class="hidden mt-6">
+        <div class="flex justify-center items-center space-x-3">
+            <!-- START OVER BUTTON -->
+            <button id="start-over" 
+                    class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-base font-bold inline-flex items-center">
+                <i class="fa-solid fa-rotate-left mr-2"></i>Start Over
+            </button>
+            
+            <!-- DOWNLOAD BUTTON -->
+            <a id="download" download="merged.pdf"
+               class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-base font-bold shadow-lg hover:shadow-xl inline-flex items-center">
+               <i class="fa-solid fa-download mr-2"></i>Download File
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- SCRIPT -->
+<script>
+let files = [];
+
+const drop = document.getElementById("drop");
+const input = document.getElementById("input");
+const list = document.getElementById("list");
+const merge = document.getElementById("merge");
+const done = document.getElementById("done");
+const download = document.getElementById("download");
+const startOverBtn = document.getElementById("start-over");
+
+drop.onclick = () => input.click();
+input.onchange = e => add(e.target.files);
+
+drop.ondragover = e => { e.preventDefault(); drop.classList.add("drag") };
+drop.ondragleave = () => drop.classList.remove("drag");
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove("drag"); add(e.dataTransfer.files) };
+
+function add(f) {
+    for (let x of f) if (x.type == "application/pdf") files.push(x);
+    render();
+}
+
+function render() {
+    list.innerHTML = "";
+    files.forEach((f, i) => {
+        list.innerHTML += `
+            <div class="p-2 bg-white rounded border flex justify-between items-center shadow-sm text-sm">
+                <span class="font-medium">${f.name}</span>
+                <button onclick="files.splice(${i},1);render();" class="text-red-600 hover:text-red-800">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>`;
+    });
+    merge.classList.toggle("hidden", files.length < 2);
+    
+    // Hide download section when files change
+    done.classList.add("hidden");
+}
+
+merge.onclick = async () => {
+    merge.innerText = "Merging...";
+    merge.disabled = true;
+
+    const output = await PDFLib.PDFDocument.create();
+
+    for (let f of files) {
+        const pdf = await PDFLib.PDFDocument.load(await f.arrayBuffer());
+        const pages = await output.copyPages(pdf, pdf.getPageIndices());
+        pages.forEach(p => output.addPage(p));
+    }
+
+    const data = await output.save();
+    download.href = URL.createObjectURL(new Blob([data], { type: "application/pdf" }));
+    done.classList.remove("hidden");
+
+    merge.innerText = "Merge PDFs";
+    merge.disabled = false;
+};
+
+/* Start Over button functionality */
+startOverBtn.onclick = () => {
+    // Reset files array
+    files = [];
+    
+    // Reset file input
+    input.value = '';
+    
+    // Hide elements
+    merge.classList.add("hidden");
+    done.classList.add("hidden");
+    
+    // Clear file list
+    list.innerHTML = '';
+    
+    // Revoke previous blob URL to free memory
+    if (download.href && download.href.startsWith('blob:')) {
+        URL.revokeObjectURL(download.href);
+    }
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Split PDF - iHatePDF</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    body{background:#f5f6f8;font-family:Inter;}
+    .drag{background:#e9f3ff;border-color:#007bff;}
+</style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+<!-- NAV -->
+<nav class="px-6 py-3 shadow bg-white flex justify-between">
+    <a href="index.html"><img src="image.png" class="h-8"></a>
+    <span class="text-blue-600 font-bold"></span>
+</nav>
+
+
+<!-- MAIN -->
+<div class="max-w-lg mx-auto text-center mt-12">
+
+    <div class="mb-8">
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-scissors text-2xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900">Split PDF</h1>
+        <p class="text-gray-600 text-sm mt-1">Upload PDF → Choose pages → Download extracted document</p>
+    </div>
+
+
+    <!-- DROP REGION -->
+    <div id="drop" class="border-2 border-dashed border-gray-400 bg-white rounded-lg p-8 cursor-pointer">
+        <input type="file" id="input" accept="application/pdf" class="hidden">
+        <i class="fa-solid fa-upload text-blue-500 text-4xl"></i>
+        <p class="mt-2 text-base font-medium">Click or Drop PDF Here</p>
+    </div>
+
+    <!-- FILENAME -->
+    <p id="file-name" class="mt-4 font-medium text-gray-700 text-sm hidden"></p>
+
+    <!-- PAGE RANGE INPUT -->
+    <div id="range-box" class="hidden mt-5">
+        <p class="text-gray-700 text-sm mb-2">Enter pages to extract (Example: <b>1-3</b> or <b>2,5,7</b>)</p>
+        <input id="range" type="text" placeholder="Ex: 1-4 or 2,3"
+               class="w-48 text-center border rounded py-2 text-sm">
+    </div>
+
+    <!-- SPLIT BUTTON -->
+    <button id="split-btn"
+            class="hidden mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-lg text-base">
+        <i class="fa-solid fa-scissors mr-2"></i>Split PDF
+    </button>
+
+    <!-- DOWNLOAD SECTION -->
+    <div id="download-section" class="hidden mt-6">
+        <div class="flex justify-between items-center">
+            <!-- DOWNLOAD BUTTON -->
+            <a id="download" download="split.pdf"
+               class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-base font-bold inline-flex items-center">
+               <i class="fa-solid fa-download mr-2"></i>Download File
+            </a>
+            
+            <!-- START OVER BUTTON -->
+            <button id="start-over" 
+                    class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-base font-bold inline-flex items-center">
+                <i class="fa-solid fa-rotate-left mr-2"></i>Start Over
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+let filePDF;
+
+/* DOM */
+const drop = document.getElementById("drop");
+const input = document.getElementById("input");
+const fname = document.getElementById("file-name");
+const rangeBox = document.getElementById("range-box");
+const splitBtn = document.getElementById("split-btn");
+const download = document.getElementById("download");
+const downloadSection = document.getElementById("download-section");
+const startOverBtn = document.getElementById("start-over");
+
+/* Click → open file chooser */
+drop.onclick = ()=> input.click();
+
+/* File selected */
+input.onchange = e => loadFile(e.target.files[0]);
+
+drop.ondragover = e =>{e.preventDefault();drop.classList.add("drag")}
+drop.ondragleave = ()=> drop.classList.remove("drag");
+drop.ondrop = e =>{
+    e.preventDefault();
+    drop.classList.remove("drag");
+    loadFile(e.dataTransfer.files[0]);
+};
+
+
+/* Store PDF */
+function loadFile(f){
+    if(f.type !== "application/pdf") return alert("Only PDF allowed");
+    filePDF = f;
+
+    fname.innerText = "Selected: " + f.name;
+    fname.classList.remove("hidden");
+    rangeBox.classList.remove("hidden");
+    splitBtn.classList.remove("hidden");
+    
+    // Hide download section if showing from previous operation
+    downloadSection.classList.add("hidden");
+}
+
+
+
+/* Split button */
+splitBtn.onclick = async()=>{
+
+    if(!filePDF) return;
+    let value = document.getElementById("range").value.trim();
+
+    if(!value) return alert("Enter page numbers or range!");
+
+    const buffer = await filePDF.arrayBuffer();
+    const pdf = await PDFLib.PDFDocument.load(buffer);
+
+    const pages = parsePages(value, pdf.getPageCount());
+    if(pages.length===0) return alert("Invalid page range");
+
+    const output = await PDFLib.PDFDocument.create();
+    const copied = await output.copyPages(pdf,pages);
+    copied.forEach(p=>output.addPage(p));
+
+    const final = await output.save();
+    const blob = new Blob([final],{type:"application/pdf"});
+    const url = URL.createObjectURL(blob);
+
+    download.href=url;
+    downloadSection.classList.remove("hidden");
+};
+
+
+
+/* Convert "1-4,6" → [0,1,2,3,5] */
+function parsePages(text,max){
+    let arr=[];
+    let parts=text.split(",");
+
+    parts.forEach(p=>{
+        if(p.includes("-")){
+            let [a,b]=p.split("-").map(Number);
+            for(let i=a;i<=b;i++) if(i>=1&&i<=max) arr.push(i-1);
+        }else{
+            let n=Number(p); if(n>=1&&n<=max) arr.push(n-1);
+        }
+    });
+
+    return arr;
+}
+
+/* Start Over button functionality */
+startOverBtn.onclick = () => {
+    // Reset file
+    filePDF = null;
+    
+    // Reset file input
+    input.value = '';
+    
+    // Hide elements
+    fname.classList.add("hidden");
+    rangeBox.classList.add("hidden");
+    splitBtn.classList.add("hidden");
+    downloadSection.classList.add("hidden");
+    
+    // Clear range input
+    document.getElementById("range").value = '';
+    
+    // Revoke previous blob URL to free memory
+    if (download.href && download.href.startsWith('blob:')) {
+        URL.revokeObjectURL(download.href);
+    }
+};
+</script>
+
+</body>
+</html>

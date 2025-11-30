@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pause</title>
+<style>
+    body{
+        margin:0;
+        background:#060b0f;
+        color:#f0f6ff;
+        font-family:"Times New Roman", serif;
+        height:100vh;
+        overflow:hidden;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        font-size:22px;
+        line-height:1.5;
+    }
+    .snow{
+        position:fixed;
+        top:-10vh;
+        color:#dbeaff;
+        pointer-events:none;
+        animation:snowfall linear infinite;
+    }
+    @keyframes snowfall{
+        0%{transform:translateY(-10vh);}
+        100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+    }
+</style>
+</head>
+<body>
+
+<div>
+    My exams are going on.<br>
+    I will resume working on this after 16th December 2025.
+</div>
+
+<script>
+for(let i=0;i<240;i++){
+    let s=document.createElement("div");
+    s.className="snow";
+    s.textContent="❄";
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=(6+Math.random()*16)+"px";
+    s.style.animationDuration=(5+Math.random()*13)+"s";
+    s.style.animationDelay=(Math.random()*8)+"s";
+    document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
