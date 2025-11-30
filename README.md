@@ -3,11 +3,7 @@
 ## 📋 Project Overview
 A comprehensive PDF manipulation tool website with modern, responsive design that allows users to merge, split, compress, and convert PDF files directly in their browser.
 
-## 📸 UI Preview
-
-## 📸 UI Preview
-
-### 🖥 Desktop Views (Large Size)
+### 🖥 Desktop Views 
 
 <p align="center">
   <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004333.png?raw=true" width="85%" />
