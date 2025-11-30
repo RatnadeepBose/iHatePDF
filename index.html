@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iHatePDF︱Online PDF tools for PDF Haters</title>
     <script src="https://cdn.tailwindcss.com"></script>
-<link rel="icon" type="image/png" href="Screenshot_2025-11-30_184307-removebg-preview.png">
-
-
+    <link rel="icon" type="image/png" href="Screenshot_2025-11-30_184307-removebg-preview.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -31,20 +29,6 @@
             }
         }
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <style>
         .tool-card {
             transition: all 0.3s ease;
@@ -74,47 +58,12 @@
         .feature-card:hover {
             transform: translateY(-3px);
         }
-
-
-
-
-
-
-
-
-
-
     </style>
 </head>
-
-
-
-
-
-
-
-
-
-
 <body class="font-sans text-gray-800 flex flex-col min-h-screen" style="
     background: linear-gradient(135deg, #f8f9fa 0%, #f5f6f7 25%, #f2f3f4 50%, #eff0f1 75%, #e9eaeb 100%);
     background-attachment: fixed;
 ">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- Navigation -->
 <nav class="bg-white shadow-sm sticky top-0 z-50 w-full">
@@ -122,66 +71,60 @@
     <div class="flex items-center justify-between h-14 w-full">
 
       <!-- LEFT: LOGO + NAV LINKS -->
-      <div class="flex items-center space-x-7">
+      <div class="flex items-center space-x-4 lg:space-x-7">
         <!-- Logo -->
-<a href="index.html" class="flex items-center">
-    <img src="image.png" class="h-9 w-auto cursor-pointer hover:opacity-80 transition" alt="Brand Logo">
-</a>
-
-
-
-
-
-
-        <!-- LINKS (NO UPPERCASE NOW) -->
-        <a href="merge-pdf.html" class="black hover:text-brand-600 font-medium text-sm tracking-wide">
-          MERGE PDF
+        <a href="index.html" class="flex items-center">
+            <img src="image.png" class="h-7 lg:h-9 w-auto cursor-pointer hover:opacity-80 transition" alt="Brand Logo">
         </a>
-        <a href="split-pdf.html" class="black hover:text-brand-600 font-medium text-sm tracking-wide">
-          SPLIT PDF
-        </a>
-        <a href="compress-pdf.html" class="black hover:text-brand-600 font-medium text-sm tracking-wide">
-          COMPRESS PDF
-        </a>
-        <a href="convert-pdf.html" class="black hover:text-brand-600 font-medium text-sm tracking-wide">
-          CONVERT PDF
-        </a>
+
+        <!-- LINKS - Hidden on mobile -->
+        <div class="hidden md:flex items-center space-x-4 lg:space-x-7">
+            <a href="merge-pdf.html" class="text-gray-700 hover:text-brand-600 font-medium text-sm tracking-wide">
+                MERGE PDF
+            </a>
+            <a href="split-pdf.html" class="text-gray-700 hover:text-brand-600 font-medium text-sm tracking-wide">
+                SPLIT PDF
+            </a>
+            <a href="compress-pdf.html" class="text-gray-700 hover:text-brand-600 font-medium text-sm tracking-wide">
+                COMPRESS PDF
+            </a>
+            <a href="convert-pdf.html" class="text-gray-700 hover:text-brand-600 font-medium text-sm tracking-wide">
+                CONVERT PDF
+            </a>
+        </div>
       </div>
 
+      <!-- RIGHT: LOGIN + SIGN UP + DOTS + MOBILE MENU -->
+      <div class="flex items-center space-x-4 lg:space-x-5">
 
-
-      
-
-      <!-- RIGHT: LOGIN + SIGN UP + DOTS -->
-      <div class="flex items-center space-x-5">
-
-        <!-- LOGIN (normal case now) -->
-        <button class="black hover:text-brand-600 font-medium text-sm tracking-wide">
+        <!-- LOGIN - Hidden on mobile -->
+        <button class="hidden sm:block text-gray-700 hover:text-brand-600 font-medium text-sm tracking-wide">
           Login
         </button>
 
-        <!-- SIGNUP BUTTON -->
-        <button class="bg-red-600 hover:bg-red-700 text-white text-[13px] font-semibold px-3 py-1 rounded-md">
+        <!-- SIGNUP BUTTON - Hidden on mobile -->
+        <button class="hidden sm:block bg-red-600 hover:bg-red-700 text-white text-[13px] font-semibold px-3 py-1 rounded-md">
           Sign Up
         </button>
 
-       <div class="grid grid-cols-3 gap-[3px] cursor-pointer"
-     style="--dot:5px; --color:#2d2d2d;">
-  
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+        <!-- DOTS MENU - Hidden on mobile -->
+        <div class="hidden md:grid grid-cols-3 gap-[3px] cursor-pointer"
+             style="--dot:5px; --color:#2d2d2d;">
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+            <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
+        </div>
 
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-  <span class="block rounded-full" style="width:var(--dot); height:var(--dot); background:var(--color);"></span>
-
-</div>
-
+        <!-- MOBILE MENU BUTTON -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-brand-600">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
 
       </div>
 
@@ -189,228 +132,114 @@
   </div>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Main Content Area -->
     <main class="flex-grow">
         
-
-
-
-
-
-
-
-
-
-
-
-
-        
-<!-- Adjustable Hero Text -->
-<div class="text-center py-10">
-
-    <!-- HEADLINE — change size with h-size -->
-    <h1 class="font-extrabold text-gray-900 leading-tight"
-        style="--h-size:2.5rem; font-size:var(--h-size);">
+<!-- Hero Section -->
+<div class="text-center py-8 md:py-12 px-4">
+    <h1 class="font-extrabold text-gray-900 leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
         Every tool you need to work with PDFs in one place
     </h1>
-
-    <!-- DESCRIPTION — change size with p-size -->
-    <p class="text-gray-600 max-w-3xl mx-auto mt-3 leading-relaxed"
-       style="--p-size:1.1rem; font-size:var(--p-size);">
+    <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed text-base sm:text-lg md:text-xl">
         Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use!
         Merge, split, compress, convert, rotate, unlock and watermark PDFs with just a few clicks.
     </p>
-
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
 <!-- Filter Pills -->
-<div class="flex flex-wrap justify-center gap-3 mb-8" style="--pill-padding:10px 20px;">
-    
+<div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-4">
     <button onclick="filterTools('all')" 
-        class="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-gray-900 text-white text-xs sm:text-sm font-semibold">
         All
     </button>
-
-
-
     <button onclick="filterTools('Organize')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         Organize PDF
     </button>
-
     <button onclick="filterTools('Optimize')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         Optimize PDF
     </button>
-
     <button onclick="filterTools('Convert')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         Convert PDF
     </button>
-
     <button onclick="filterTools('Edit')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         Edit PDF
     </button>
-
     <button onclick="filterTools('Security')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         PDF Security
     </button>
     <button onclick="filterTools('Workflows')" 
-        class="px-5 py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
-        style="padding:var(--pill-padding);">
+        class="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm hover:bg-gray-100">
         Workflows
     </button>
 </div>
 
+<!-- Tool Grid -->
+<div class="w-full px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div id="grid-layout" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        <!-- Tool cards will be injected here via JS -->
+    </div>
+</div>
 
-
-        <!-- Tool Grid -->
-        <div class="w-full px-4 sm:px-6 lg:px-8 py-12">
-            <div id="grid-layout" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                <!-- Tool cards will be injected here via JS -->
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="py-20 bg-white">
-    <div class="text-center mb-10">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Work your way</h2>
+<!-- Work Your Way Section -->
+<section class="py-16 md:py-20 bg-white">
+    <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-4xl font-bold text-gray-900">Work your way</h2>
     </div>
 
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-6">
         <!-- Card 1 -->
-        <div class="rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
-            <img src="1hate.png" class="w-full rounded-t-3xl" />
-            <div class="p-6 relative">
-                <h3 class="font-bold text-gray-900 text-lg mb-2">Work offline with Desktop</h3>
+        <div class="rounded-2xl md:rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
+            <img src="1hate.png" class="w-full rounded-t-2xl md:rounded-t-3xl" />
+            <div class="p-4 md:p-6 relative">
+                <h3 class="font-bold text-gray-900 text-base md:text-lg mb-2">Work offline with Desktop</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     Batch edit and manage documents locally, with no internet and no limits.
                 </p>
-                <span class="absolute bottom-5 right-5 text-red-500 text-lg font-bold">↗</span>
+                <span class="absolute bottom-4 md:bottom-5 right-4 md:right-5 text-red-500 text-lg font-bold">↗</span>
             </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
-            <img src="2hate.png" class="w-full rounded-t-3xl" />
-            <div class="p-6 relative">
-                <h3 class="font-bold text-gray-900 text-lg mb-2">On-the-go with Mobile</h3>
+        <div class="rounded-2xl md:rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
+            <img src="2hate.png" class="w-full rounded-t-2xl md:rounded-t-3xl" />
+            <div class="p-4 md:p-6 relative">
+                <h3 class="font-bold text-gray-900 text-base md:text-lg mb-2">On-the-go with Mobile</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     Your favorite tools, right in your pocket. Work anywhere, anytime.
                 </p>
-                <span class="absolute bottom-5 right-5 text-red-500 text-lg font-bold">↗</span>
+                <span class="absolute bottom-4 md:bottom-5 right-4 md:right-5 text-red-500 text-lg font-bold">↗</span>
             </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
-            <img src="3hate.png" class="w-full rounded-t-3xl" />
-            <div class="p-6 relative">
-                <h3 class="font-bold text-gray-900 text-lg mb-2">Built for business</h3>
+        <div class="rounded-2xl md:rounded-3xl bg-[] shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
+            <img src="3hate.png" class="w-full rounded-t-2xl md:rounded-t-3xl" />
+            <div class="p-4 md:p-6 relative">
+                <h3 class="font-bold text-gray-900 text-base md:text-lg mb-2">Built for business</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     Automate document management, onboard teams, scale with ease.
                 </p>
-                <span class="absolute bottom-5 right-5 text-red-500 text-lg font-bold">↗</span>
+                <span class="absolute bottom-4 md:bottom-5 right-4 md:right-5 text-red-500 text-lg font-bold">↗</span>
             </div>
         </div>
-
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="w-full flex justify-center py-14">
-    <div class="bg-[#FFF3CF] shadow-md rounded-[18px] w-[900px] overflow-hidden"> <!-- final accurate color -->
-
-        <div class="grid grid-cols-2">
-
+<!-- Premium Banner -->
+<div class="w-full flex justify-center py-8 md:py-14 px-4">
+    <div class="bg-[#FFF3CF] shadow-md rounded-2xl md:rounded-[18px] w-full max-w-4xl lg:max-w-[900px] overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2">
             <!-- LEFT -->
-            <div class="p-10">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+            <div class="p-6 md:p-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">
                     Get more with Premium
                 </h2>
-
-                <ul class="space-y-3 text-base text-gray-700 leading-relaxed">
+                <ul class="space-y-3 text-sm md:text-base text-gray-700 leading-relaxed">
                     <li class="flex gap-3">
                         <i class="fa-solid fa-check text-green-600 pt-[3px]"></i>
                         Full access + offline desktop support
@@ -424,139 +253,70 @@
                         Automate workflows effortlessly
                     </li>
                 </ul>
-
-                <button class="mt-7 bg-[#FFC233] hover:bg-[#FFB81E] text-[#382300] font-semibold px-6 py-3 rounded-lg">
+                <button class="mt-6 md:mt-7 bg-[#FFC233] hover:bg-[#FFB81E] text-[#382300] font-semibold px-5 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base">
                     <i class="fa-solid fa-crown mr-2"></i> Get Premium
                 </button>
             </div>
 
-            <!-- RIGHT IMAGE — Touching all edges -->
-            <div class="w-full h-full">
-                <img src="4hate.png"
-                     class="w-full h-full object-cover block" />
+            <!-- RIGHT IMAGE - Hidden on mobile -->
+            <div class="w-full h-full hidden md:block">
+                <img src="4hate.png" class="w-full h-full object-cover block" />
             </div>
-
         </div>
-
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-6">
-
-        <!-- LARGE IMAGE LEFT - NO BORDER, NO HANDLES -->
-        <div class="flex justify-center">
-            <img src="iloveimg.png"
-                 class="w-[520px] md:w-[600px] rounded-2xl ">
+<!-- iHateIMG Section -->
+<section class="py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 md:px-6">
+        <!-- LARGE IMAGE LEFT -->
+        <div class="flex justify-center order-2 md:order-1">
+            <img src="iloveimg.png" class="w-full max-w-md md:max-w-none md:w-[520px] lg:w-[600px] rounded-2xl">
         </div>
 
         <!-- TEXT RIGHT -->
-        <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <div class="order-1 md:order-2 text-center md:text-left">
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
                 Image editing made simple with iHateIMG
             </h2>
-
-            <p class="text-gray-600 text-lg leading-relaxed mb-7">
+            <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-6 md:mb-7">
                 Experience fast, secure and smart image processing. Resize, compress,
                 enhance quality, convert formats & edit visually with AI tools — instantly.
             </p>
-
-            <button class="border border-red-600 text-red-600 font-semibold px-7 py-3 rounded-md hover:bg-red-50 transition tracking-wide">
+            <button class="border border-red-600 text-red-600 font-semibold px-6 py-2 md:px-7 md:py-3 rounded-md hover:bg-red-50 transition tracking-wide text-sm md:text-base">
                 Go to iHateIMG
             </button>
         </div>
-
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="py-20 bg-white text-center">
-
-    <!-- TITLE -->
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+<!-- Trust Section -->
+<section class="py-16 md:py-20 bg-white text-center px-4">
+    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
         The PDF software trusted by millions of users
     </h2>
-
-    <!-- SUB TEXT -->
-    <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
         iHatePDF is your number one web app for editing PDF with ease. 
         Enjoy all the tools you need to work efficiently with your digital documents 
         while keeping your data safe and secure.
     </p>
-
-    <!-- ICON ROW -->
-    <div class="flex justify-center items-center gap-24 mt-14">
-
-        <img src="iso.svg" class="w-[75px] opacity-90" />
-        <img src="ssl.svg" class="w-[75px] opacity-90" />
-        <img src="pdf.svg" class="w-[75px] opacity-90" />
-
+    <div class="flex justify-center items-center gap-8 md:gap-24 mt-8 md:mt-14">
+        <img src="iso.svg" class="w-12 md:w-[75px] opacity-90" />
+        <img src="ssl.svg" class="w-12 md:w-[75px] opacity-90" />
+        <img src="pdf.svg" class="w-12 md:w-[75px] opacity-90" />
     </div>
-
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="bg-[#1d1d22] text-gray-300 py-16">
-    <div class="max-w-[1500px] mx-auto px-10">
-
+<!-- Footer -->
+<footer class="bg-[#1d1d22] text-gray-300 py-12 md:py-16">
+    <div class="max-w-[1500px] mx-auto px-4 md:px-10">
         <!-- TOP GRID -->
-        <div class="flex justify-between mb-14">
-
+        <div class="flex flex-col lg:flex-row justify-between mb-8 md:mb-14 gap-8">
             <!-- LINK GRID -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-14">
-
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-14">
                 <div>
-                    <h4 class="font-semibold text-white mb-4 tracking-wide">PRODUCT</h4>
-                    <ul class="space-y-2">
+                    <h4 class="font-semibold text-white mb-3 md:mb-4 tracking-wide text-sm md:text-base">PRODUCT</h4>
+                    <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white block">Home</a></li>
                         <li><a href="#" class="hover:text-white block">Features</a></li>
                         <li><a href="#" class="hover:text-white block">Pricing</a></li>
@@ -566,8 +326,8 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-white mb-4 tracking-wide">RESOURCES</h4>
-                    <ul class="space-y-2">
+                    <h4 class="font-semibold text-white mb-3 md:mb-4 tracking-wide text-sm md:text-base">RESOURCES</h4>
+                    <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white block">iHatePDF Desktop</a></li>
                         <li><a href="#" class="hover:text-white block">iHatePDF Mobile</a></li>
                         <li><a href="#" class="hover:text-white block">iHateSign</a></li>
@@ -577,16 +337,16 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-white mb-4 tracking-wide">SOLUTIONS</h4>
-                    <ul class="space-y-2">
+                    <h4 class="font-semibold text-white mb-3 md:mb-4 tracking-wide text-sm md:text-base">SOLUTIONS</h4>
+                    <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white block">Business</a></li>
                         <li><a href="#" class="hover:text-white block">Education</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-white mb-4 tracking-wide">LEGAL</h4>
-                    <ul class="space-y-2">
+                    <h4 class="font-semibold text-white mb-3 md:mb-4 tracking-wide text-sm md:text-base">LEGAL</h4>
+                    <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white block">Security</a></li>
                         <li><a href="#" class="hover:text-white block">Privacy policy</a></li>
                         <li><a href="#" class="hover:text-white block">Terms & conditions</a></li>
@@ -595,8 +355,8 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-white mb-4 tracking-wide">COMPANY</h4>
-                    <ul class="space-y-2">
+                    <h4 class="font-semibold text-white mb-3 md:mb-4 tracking-wide text-sm md:text-base">COMPANY</h4>
+                    <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white block">About us</a></li>
                         <li><a href="#" class="hover:text-white block">Contact us</a></li>
                         <li><a href="#" class="hover:text-white block">Blog</a></li>
@@ -606,69 +366,47 @@
             </div>
 
             <!-- STORE BADGES RIGHT COLUMN -->
-            <div class="flex flex-col gap-3">
-                <a href="#"><img src="google_play_w.svg" class="h-[44px] object-contain hover:opacity-100 opacity-90"></a>
-                <a href="#"><img src="app_store_w.svg" class="h-[44px] object-contain hover:opacity-100 opacity-90"></a>
-                <a href="#"><img src="mac_store_w.svg" class="h-[44px] object-contain hover:opacity-100 opacity-90"></a>
-                <a href="#"><img src="microsoft_store_w.svg" class="h-[44px] object-contain hover:opacity-100 opacity-90"></a>
+            <div class="flex flex-row lg:flex-col gap-3 justify-center lg:justify-start">
+                <a href="#"><img src="google_play_w.svg" class="h-10 md:h-[44px] object-contain hover:opacity-100 opacity-90"></a>
+                <a href="#"><img src="app_store_w.svg" class="h-10 md:h-[44px] object-contain hover:opacity-100 opacity-90"></a>
+                <a href="#"><img src="mac_store_w.svg" class="h-10 md:h-[44px] object-contain hover:opacity-100 opacity-90"></a>
+                <a href="#"><img src="microsoft_store_w.svg" class="h-10 md:h-[44px] object-contain hover:opacity-100 opacity-90"></a>
             </div>
-
         </div>
 
-        <hr class="border-gray-700 mb-8">
+        <hr class="border-gray-700 mb-6 md:mb-8">
 
-        <div class="flex justify-between items-center">
-
-            <div class="flex gap-5 text-xl text-gray-400">
-                
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex gap-4 md:gap-5 text-lg md:text-xl text-gray-400">
                 <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="#" class="hover:text-white"><i class="fa-brands fa-github"></i></a>
             </div>
-
-            <a href="#" class="text-sm opacity-80 hover:text-white">
+            <a href="#" class="text-xs md:text-sm opacity-80 hover:text-white text-center">
                 © 2025 iHatePDF — Your PDF Editor
             </a>
         </div>
     </div>
 </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-white z-50 hidden flex-col p-6">
+    <div class="flex justify-between items-center mb-8">
+        <img src="image.png" class="h-8" alt="Logo">
+        <button id="close-mobile-menu" class="text-gray-600">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+    </div>
+    <div class="flex flex-col space-y-6">
+        <a href="merge-pdf.html" class="text-xl font-medium py-3 border-b border-gray-200">Merge PDF</a>
+        <a href="split-pdf.html" class="text-xl font-medium py-3 border-b border-gray-200">Split PDF</a>
+        <a href="compress-pdf.html" class="text-xl font-medium py-3 border-b border-gray-200">Compress PDF</a>
+        <a href="convert-pdf.html" class="text-xl font-medium py-3 border-b border-gray-200">Convert PDF</a>
+        <div class="flex gap-4 mt-8">
+            <button class="flex-1 text-gray-700 font-medium py-3 border border-gray-300 rounded-lg">Login</button>
+            <button class="flex-1 bg-red-600 text-white font-medium py-3 rounded-lg">Sign Up</button>
+        </div>
+    </div>
+</div>
 
     <!-- Logic -->
     <script>
@@ -956,7 +694,7 @@
 
             filteredTools.forEach(tool => {
                 const card = document.createElement('div');
-                card.className = 'tool-card bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-start cursor-pointer group h-full fade-in';
+                card.className = 'tool-card bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 flex flex-col items-start cursor-pointer group h-full fade-in';
                 
                 // Create link wrapper
                 const link = document.createElement('a');
@@ -967,18 +705,18 @@
 
                 let badgeHtml = '';
                 if(tool.new) {
-                    badgeHtml = `<span class="absolute top-4 right-4 bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">New</span>`;
+                    badgeHtml = `<span class="absolute top-3 md:top-4 right-3 md:right-4 bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">New</span>`;
                 }
 
                 link.innerHTML = `
                     <div class="relative w-full h-full flex flex-col">
                         ${badgeHtml}
-                        <div class="mb-5 p-3 rounded-lg inline-block ${iconColor.bg} ${iconColor.text} group-hover:scale-110 transition duration-300 w-fit">
-                            <i class="fa-solid ${tool.icon} text-3xl"></i>
+                        <div class="mb-4 md:mb-5 p-2 md:p-3 rounded-lg inline-block ${iconColor.bg} ${iconColor.text} group-hover:scale-110 transition duration-300 w-fit">
+                            <i class="fa-solid ${tool.icon} text-2xl md:text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition">${tool.title}</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">${tool.desc}</p>
-                        <div class="mt-auto pt-4 flex items-center text-brand-600 font-medium text-sm opacity-0 group-hover:opacity-100 transition transform translate-y-2 group-hover:translate-y-0">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition">${tool.title}</h3>
+                        <p class="text-gray-500 text-xs md:text-sm leading-relaxed">${tool.desc}</p>
+                        <div class="mt-auto pt-3 md:pt-4 flex items-center text-brand-600 font-medium text-xs md:text-sm opacity-0 group-hover:opacity-100 transition transform translate-y-2 group-hover:translate-y-0">
                             Use Tool <i class="fa-solid fa-arrow-right ml-2"></i>
                         </div>
                     </div>
@@ -1023,6 +761,15 @@
         function setBtnInactive(btn) {
             btn.className = 'filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition';
         }
+
+        // Mobile Menu Functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+        });
+        
+        document.getElementById('close-mobile-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
 
         // Initialize
         renderTools('all');
