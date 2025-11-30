@@ -5,16 +5,32 @@ A comprehensive PDF manipulation tool website with modern, responsive design tha
 
 ## 📸 UI Preview
 
-### 🖥 Desktop Screens (3)
-| Home / Hero | Tools Grid | Premium Section |
-|------------|------------|-----------------|
-| ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004333.png?raw=true) | ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004358.png?raw=true) | ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true) |
+## 📸 UI Preview
+
+### 🖥 Desktop Views (Large Size)
+
+<p align="center">
+  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004333.png?raw=true" width="85%" />
+  <br><em>Home / Main Interface</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004358.png?raw=true" width="85%" />
+  <br><em>Tool Grid Section</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true" width="85%" />
+  <br><em>Premium + Features UI</em>
+</p>
 
 ---
 
-### 📱 Mobile View (This Image)
+### 📱 Mobile View (Also Enlarged)
+
 <p align="center">
-  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004300.png?raw=true" width="30%">
+  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004300.png?raw=true" width="45%" />
+  <br><em>Mobile Responsive Layout</em>
 </p>
 
 
