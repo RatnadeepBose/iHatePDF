@@ -15,7 +15,7 @@ A comprehensive PDF manipulation tool website with modern, responsive design tha
 
 ### 📱 Mobile Interface — Responsive View
 <p align="center">
-  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true" width="40%" />
+  <img src="[https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004300.png?raw=true)" width="40%" />
 </p>
 
 ### Core Functionality
