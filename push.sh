@@ -1,1 +1,1 @@
-cd "C:\Users\boser\Downloads\i hate pdf" && git add . && git commit -m "added screenshots" && git push origin main
+cd "C:\Users\boser\Downloads\i hate pdf" && git add . && git commit -m "added some important links" && git push origin main
