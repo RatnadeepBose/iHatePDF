@@ -3,20 +3,20 @@
 ## 📋 Project Overview
 A comprehensive PDF manipulation tool website with modern, responsive design that allows users to merge, split, compress, and convert PDF files directly in their browser.
 
-## 🚀 Features
-## 📸 UI Screenshots
+## 📸 UI Preview
 
-### 🖥 Desktop — Full Web Experience
-| Home Page | Tools Grid | Features / Premium Section |
-|----------|------------|---------------------------|
+### 🖥 Desktop Screens (3)
+| Home / Hero | Tools Grid | Premium Section |
+|------------|------------|-----------------|
 | ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004333.png?raw=true) | ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004358.png?raw=true) | ![](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true) |
 
 ---
 
-### 📱 Mobile Interface — Responsive View
+### 📱 Mobile View (This Image)
 <p align="center">
-  <img src="[https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004410.png?raw=true](https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004300.png?raw=true)" width="40%" />
+  <img src="https://github.com/RatnadeepBose/iHatePDF/blob/main/Screenshot%202025-12-01%20004300.png?raw=true" width="30%">
 </p>
+
 
 ### Core Functionality
 - **PDF Merging**: Combine multiple PDF files into one
