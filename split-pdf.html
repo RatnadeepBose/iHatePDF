@@ -1,87 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Split PDF - iHatePDF</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    body{background:#f5f6f8;font-family:Inter;}
-    .drag{background:#e9f3ff;border-color:#007bff;}
+    body {
+        background: #f5f6f8;
+        font-family: 'Inter', sans-serif;
+    }
+    .drag {
+        background: #e9f3ff;
+        border-color: #007bff;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
 </style>
 </head>
 
 <body class="flex flex-col min-h-screen">
 
 <!-- NAV -->
-<nav class="px-6 py-3 shadow bg-white flex justify-between">
-    <a href="index.html"><img src="image.png" class="h-8"></a>
-    <span class="text-blue-600 font-bold"></span>
+<nav class="px-4 sm:px-6 py-3 shadow bg-white flex justify-between items-center sticky top-0 z-50">
+    <a href="index.html" class="flex items-center">
+        <img src="image.png" class="h-7 sm:h-8">
+    </a>
 </nav>
 
-
 <!-- MAIN -->
-<div class="max-w-lg mx-auto text-center mt-12">
+<div class="flex-grow flex items-center justify-center px-4 py-8 sm:py-12">
+    <div class="w-full max-w-md sm:max-w-lg mx-auto text-center">
 
-    <div class="mb-8">
-        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <i class="fa-solid fa-scissors text-2xl"></i>
+        <!-- HEADER -->
+        <div class="mb-6 sm:mb-8 fade-in">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <i class="fa-solid fa-scissors text-xl sm:text-2xl"></i>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Split PDF</h1>
+            <p class="text-gray-600 text-xs sm:text-sm">Upload PDF → Choose pages → Download extracted document</p>
         </div>
-        <h1 class="text-2xl font-bold text-gray-900">Split PDF</h1>
-        <p class="text-gray-600 text-sm mt-1">Upload PDF → Choose pages → Download extracted document</p>
-    </div>
 
+        <!-- DROP REGION -->
+        <div id="drop" class="border-2 border-dashed border-gray-300 bg-white rounded-lg p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:border-blue-400 hover:bg-blue-50">
+            <input type="file" id="input" accept="application/pdf" class="hidden">
+            <i class="fa-solid fa-upload text-blue-500 text-3xl sm:text-4xl mb-2"></i>
+            <p class="text-sm sm:text-base font-medium text-gray-700">Click or Drop PDF Here</p>
+            <p class="text-xs text-gray-500 mt-1">Maximum file size: 50MB</p>
+        </div>
 
-    <!-- DROP REGION -->
-    <div id="drop" class="border-2 border-dashed border-gray-400 bg-white rounded-lg p-8 cursor-pointer">
-        <input type="file" id="input" accept="application/pdf" class="hidden">
-        <i class="fa-solid fa-upload text-blue-500 text-4xl"></i>
-        <p class="mt-2 text-base font-medium">Click or Drop PDF Here</p>
-    </div>
+        <!-- FILENAME -->
+        <p id="file-name" class="mt-3 sm:mt-4 font-medium text-gray-700 text-xs sm:text-sm hidden fade-in"></p>
 
-    <!-- FILENAME -->
-    <p id="file-name" class="mt-4 font-medium text-gray-700 text-sm hidden"></p>
+        <!-- PAGE RANGE INPUT -->
+        <div id="range-box" class="hidden mt-4 sm:mt-5 fade-in">
+            <p class="text-gray-700 text-xs sm:text-sm mb-2">Enter pages to extract</p>
+            <p class="text-xs text-gray-500 mb-2">Example: <b>1-3</b> or <b>2,5,7</b> or <b>1,3-5</b></p>
+            <input id="range" type="text" placeholder="Ex: 1-4 or 2,3"
+                   class="w-full max-w-xs text-center border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
 
-    <!-- PAGE RANGE INPUT -->
-    <div id="range-box" class="hidden mt-5">
-        <p class="text-gray-700 text-sm mb-2">Enter pages to extract (Example: <b>1-3</b> or <b>2,5,7</b>)</p>
-        <input id="range" type="text" placeholder="Ex: 1-4 or 2,3"
-               class="w-48 text-center border rounded py-2 text-sm">
-    </div>
+        <!-- SPLIT BUTTON -->
+        <button id="split-btn"
+                class="hidden mt-4 sm:mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 sm:px-8 sm:py-3 rounded-lg text-sm sm:text-base transition-colors duration-200 w-full max-w-xs fade-in">
+            <i class="fa-solid fa-scissors mr-2"></i>Split PDF
+        </button>
 
-    <!-- SPLIT BUTTON -->
-    <button id="split-btn"
-            class="hidden mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-lg text-base">
-        <i class="fa-solid fa-scissors mr-2"></i>Split PDF
-    </button>
+        <!-- LOADING SPINNER -->
+        <div id="loading" class="hidden mt-4 sm:mt-5 fade-in">
+            <div class="flex items-center justify-center space-x-2 text-blue-600">
+                <i class="fa-solid fa-spinner fa-spin text-lg"></i>
+                <span class="text-sm font-medium">Processing PDF...</span>
+            </div>
+        </div>
 
-    <!-- DOWNLOAD SECTION -->
-    <div id="download-section" class="hidden mt-6">
-        <div class="flex justify-between items-center">
-            <!-- DOWNLOAD BUTTON -->
-            <a id="download" download="split.pdf"
-               class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-base font-bold inline-flex items-center">
-               <i class="fa-solid fa-download mr-2"></i>Download File
-            </a>
+        <!-- DOWNLOAD SECTION -->
+        <div id="download-section" class="hidden mt-4 sm:mt-6 fade-in">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <i class="fa-solid fa-check-circle text-green-600 text-lg mr-2"></i>
+                <span class="text-green-800 text-sm font-medium">PDF split successfully!</span>
+            </div>
             
-            <!-- START OVER BUTTON -->
-            <button id="start-over" 
-                    class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-base font-bold inline-flex items-center">
-                <i class="fa-solid fa-rotate-left mr-2"></i>Start Over
-            </button>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <!-- DOWNLOAD BUTTON -->
+                <a id="download" download="split.pdf"
+                   class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-lg text-sm sm:text-base font-bold inline-flex items-center justify-center transition-colors duration-200 w-full sm:w-auto">
+                   <i class="fa-solid fa-download mr-2"></i>Download File
+                </a>
+                
+                <!-- START OVER BUTTON -->
+                <button id="start-over" 
+                        class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-lg text-sm sm:text-base font-bold inline-flex items-center justify-center transition-colors duration-200 w-full sm:w-auto">
+                    <i class="fa-solid fa-rotate-left mr-2"></i>Start Over
+                </button>
+            </div>
         </div>
+
+        <!-- ERROR MESSAGE -->
+        <div id="error-message" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg fade-in">
+            <i class="fa-solid fa-exclamation-triangle text-red-600 mr-2"></i>
+            <span id="error-text" class="text-red-800 text-sm"></span>
+        </div>
+
     </div>
 </div>
 
-
+<!-- FOOTER -->
+<footer class="bg-white border-t border-gray-200 py-4 mt-auto">
+    <div class="text-center text-gray-600 text-xs sm:text-sm">
+        © 2025 iHatePDF - Your PDF Editor
+    </div>
+</footer>
 
 <script>
 let filePDF;
 
-/* DOM */
+/* DOM Elements */
 const drop = document.getElementById("drop");
 const input = document.getElementById("input");
 const fname = document.getElementById("file-name");
@@ -90,25 +134,64 @@ const splitBtn = document.getElementById("split-btn");
 const download = document.getElementById("download");
 const downloadSection = document.getElementById("download-section");
 const startOverBtn = document.getElementById("start-over");
+const loading = document.getElementById("loading");
+const errorMessage = document.getElementById("error-message");
+const errorText = document.getElementById("error-text");
 
 /* Click → open file chooser */
-drop.onclick = ()=> input.click();
+drop.onclick = () => input.click();
 
 /* File selected */
 input.onchange = e => loadFile(e.target.files[0]);
 
-drop.ondragover = e =>{e.preventDefault();drop.classList.add("drag")}
-drop.ondragleave = ()=> drop.classList.remove("drag");
-drop.ondrop = e =>{
+/* Drag and drop handlers */
+drop.ondragover = e => {
+    e.preventDefault();
+    drop.classList.add("drag");
+}
+
+drop.ondragleave = () => {
+    drop.classList.remove("drag");
+}
+
+drop.ondrop = e => {
     e.preventDefault();
     drop.classList.remove("drag");
-    loadFile(e.dataTransfer.files[0]);
+    if (e.dataTransfer.files.length > 0) {
+        loadFile(e.dataTransfer.files[0]);
+    }
 };
 
+/* Show error message */
+function showError(message) {
+    errorText.textContent = message;
+    errorMessage.classList.remove("hidden");
+    setTimeout(() => {
+        errorMessage.classList.add("hidden");
+    }, 5000);
+}
+
+/* Hide error message */
+function hideError() {
+    errorMessage.classList.add("hidden");
+}
 
 /* Store PDF */
-function loadFile(f){
-    if(f.type !== "application/pdf") return alert("Only PDF allowed");
+function loadFile(f) {
+    hideError();
+    
+    // Check file type
+    if (f.type !== "application/pdf") {
+        showError("Only PDF files are allowed");
+        return;
+    }
+
+    // Check file size (50MB limit)
+    if (f.size > 50 * 1024 * 1024) {
+        showError("File size must be less than 50MB");
+        return;
+    }
+
     filePDF = f;
 
     fname.innerText = "Selected: " + f.name;
@@ -118,52 +201,92 @@ function loadFile(f){
     
     // Hide download section if showing from previous operation
     downloadSection.classList.add("hidden");
+    
+    // Clear range input
+    document.getElementById("range").value = '';
 }
 
-
-
 /* Split button */
-splitBtn.onclick = async()=>{
+splitBtn.onclick = async () => {
+    if (!filePDF) {
+        showError("Please select a PDF file first");
+        return;
+    }
 
-    if(!filePDF) return;
     let value = document.getElementById("range").value.trim();
+    if (!value) {
+        showError("Enter page numbers or range!");
+        return;
+    }
 
-    if(!value) return alert("Enter page numbers or range!");
+    // Show loading
+    loading.classList.remove("hidden");
+    splitBtn.disabled = true;
+    hideError();
 
-    const buffer = await filePDF.arrayBuffer();
-    const pdf = await PDFLib.PDFDocument.load(buffer);
+    try {
+        const buffer = await filePDF.arrayBuffer();
+        const pdf = await PDFLib.PDFDocument.load(buffer);
+        const totalPages = pdf.getPageCount();
 
-    const pages = parsePages(value, pdf.getPageCount());
-    if(pages.length===0) return alert("Invalid page range");
+        const pages = parsePages(value, totalPages);
+        if (pages.length === 0) {
+            showError("Invalid page range. Please check your input.");
+            loading.classList.add("hidden");
+            splitBtn.disabled = false;
+            return;
+        }
 
-    const output = await PDFLib.PDFDocument.create();
-    const copied = await output.copyPages(pdf,pages);
-    copied.forEach(p=>output.addPage(p));
+        const output = await PDFLib.PDFDocument.create();
+        const copied = await output.copyPages(pdf, pages);
+        copied.forEach(p => output.addPage(p));
 
-    const final = await output.save();
-    const blob = new Blob([final],{type:"application/pdf"});
-    const url = URL.createObjectURL(blob);
+        const final = await output.save();
+        const blob = new Blob([final], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
 
-    download.href=url;
-    downloadSection.classList.remove("hidden");
+        download.href = url;
+        downloadSection.classList.remove("hidden");
+        
+    } catch (error) {
+        console.error("Error processing PDF:", error);
+        showError("Error processing PDF. Please try again with a different file.");
+    } finally {
+        loading.classList.add("hidden");
+        splitBtn.disabled = false;
+    }
 };
 
-
-
 /* Convert "1-4,6" → [0,1,2,3,5] */
-function parsePages(text,max){
-    let arr=[];
-    let parts=text.split(",");
+function parsePages(text, max) {
+    let arr = [];
+    let parts = text.split(",");
 
-    parts.forEach(p=>{
-        if(p.includes("-")){
-            let [a,b]=p.split("-").map(Number);
-            for(let i=a;i<=b;i++) if(i>=1&&i<=max) arr.push(i-1);
-        }else{
-            let n=Number(p); if(n>=1&&n<=max) arr.push(n-1);
+    parts.forEach(p => {
+        p = p.trim();
+        if (p.includes("-")) {
+            let [a, b] = p.split("-").map(Number);
+            if (isNaN(a) || isNaN(b) || a > b) return;
+            
+            // Ensure pages are within valid range
+            a = Math.max(1, a);
+            b = Math.min(max, b);
+            
+            for (let i = a; i <= b; i++) {
+                if (i >= 1 && i <= max) {
+                    arr.push(i - 1);
+                }
+            }
+        } else {
+            let n = Number(p);
+            if (!isNaN(n) && n >= 1 && n <= max) {
+                arr.push(n - 1);
+            }
         }
     });
 
+    // Remove duplicates and sort
+    arr = [...new Set(arr)].sort((a, b) => a - b);
     return arr;
 }
 
@@ -180,15 +303,30 @@ startOverBtn.onclick = () => {
     rangeBox.classList.add("hidden");
     splitBtn.classList.add("hidden");
     downloadSection.classList.add("hidden");
+    loading.classList.add("hidden");
+    errorMessage.classList.add("hidden");
     
     // Clear range input
     document.getElementById("range").value = '';
+    
+    // Re-enable split button
+    splitBtn.disabled = false;
     
     // Revoke previous blob URL to free memory
     if (download.href && download.href.startsWith('blob:')) {
         URL.revokeObjectURL(download.href);
     }
+    
+    // Reset drop zone appearance
+    drop.classList.remove("drag");
 };
+
+// Add keyboard support for range input
+document.getElementById("range").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        splitBtn.click();
+    }
+});
 </script>
 
 </body>

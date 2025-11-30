@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pause</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
     body{
         margin:0;
@@ -12,12 +16,6 @@
         font-family:"Times New Roman", serif;
         height:100vh;
         overflow:hidden;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        font-size:22px;
-        line-height:1.5;
     }
     .snow{
         position:fixed;
@@ -32,24 +30,40 @@
     }
 </style>
 </head>
-<body>
 
-<div>
-    My exams are going on.<br>
-    I will resume working on this after 16th December 2025.
+<body class="flex flex-col min-h-screen">
+
+<!-- NAV -->
+<nav class="px-4 sm:px-6 py-3 shadow bg-white flex justify-between items-center sticky top-0 z-50">
+    <a href="index.html" class="flex items-center">
+        <img src="image.png" class="h-7 sm:h-8">
+    </a>
+</nav>
+
+<div class="flex-grow flex items-center justify-center text-center px-4">
+    <div class="text-2xl sm:text-4xl leading-relaxed">
+        My exams are going on.<br>
+        I will resume working on this after 16th December 2025.
+    </div>
 </div>
 
 <script>
-for(let i=0;i<240;i++){
-    let s=document.createElement("div");
-    s.className="snow";
-    s.textContent="❄";
-    s.style.left=Math.random()*100+"vw";
-    s.style.fontSize=(6+Math.random()*16)+"px";
-    s.style.animationDuration=(5+Math.random()*13)+"s";
-    s.style.animationDelay=(Math.random()*8)+"s";
-    document.body.appendChild(s);
-}
+// Start snow immediately without waiting for page load
+(function() {
+    // Adjust snowflakes based on screen size for better performance
+    const snowflakeCount = window.innerWidth < 768 ? 120 : 240;
+
+    for(let i = 0; i < snowflakeCount; i++){
+        let s = document.createElement("div");
+        s.className = "snow";
+        s.textContent = "❄";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = (8 + Math.random() * 20) + "px";
+        s.style.animationDuration = (5 + Math.random() * 13) + "s";
+        s.style.animationDelay = (Math.random() * 8) + "s";
+        document.body.appendChild(s);
+    }
+})();
 </script>
 
 </body>

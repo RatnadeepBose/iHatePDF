@@ -1,1 +1,1 @@
-cd "C:\Users\boser\Downloads\i hate pdf" && git add . && git commit -m "mobile fixing" && git push origin main
+cd "C:\Users\boser\Downloads\i hate pdf" && git add . && git commit -m "adjustments for both mobile and desktop" && git push origin main
