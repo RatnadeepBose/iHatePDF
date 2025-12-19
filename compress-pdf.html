@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compress PDF to 999KB - iHatePDF</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { background:#F7F7F7; font-family:'Inter',sans-serif; }
+.drag { background:#FFF1F3; border-color:#E11D48; }
+.processing { animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+</style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+<!-- NAV -->
+<nav class="bg-white px-4 py-3 shadow-sm sticky top-0 z-50">
+  <a href="index.html" class="flex items-center">
+    <img src="image.png" class="h-8" alt="Logo">
+  </a>
+</nav>
+
+<!-- MAIN -->
+<div class="flex-grow flex items-center justify-center px-4 py-12">
+<div class="w-full max-w-lg mx-auto text-center">
+
+<!-- HERO -->
+<div class="mb-8">
+  <div class="w-16 h-16 bg-green-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+    <i class="fa-solid fa-compress-arrows-alt text-2xl md:text-3xl"></i>
+  </div>
+
+  <h1 class="text-2xl font-black text-gray-900 mb-2">
+    Auto-Compress to <span class="text-green-600">999KB</span>
+  </h1>
+
+  <p class="text-gray-500 text-sm">
+    Guaranteed size limit with extreme compression.
+  </p>
+</div>
+
+<!-- DROP -->
+<div id="drop" class="border-2 border-dashed border-gray-300 rounded-2xl bg-white p-10 cursor-pointer hover:border-red-500 transition-all">
+  <input type="file" id="input" accept="application/pdf" class="hidden">
+  <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-300 mb-4"></i>
+  <p class="text-lg font-bold text-gray-700">Drop your PDF here</p>
+  <p class="text-xs text-gray-400 mt-2">Guaranteed ≤ 999 KB</p>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="hidden mt-8">
+  <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+    <div id="bar" class="bg-red-600 h-2 rounded-full transition-all"></div>
+  </div>
+  <p id="status" class="text-sm font-bold text-gray-600 processing">
+    Processing…
+  </p>
+</div>
+
+<!-- DONE -->
+<div id="done" class="hidden mt-8">
+  <div class="bg-white p-6 rounded-2xl border shadow-xl">
+    <p id="result" class="text-sm font-bold mb-4"></p>
+    <a id="download" class="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-bold flex items-center justify-center">
+      <i class="fa-solid fa-download mr-2"></i> Download PDF
+    </a>
+    <button onclick="location.reload()" class="mt-4 text-xs text-gray-400 hover:text-red-600">
+      Start Over
+    </button>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="py-6 text-center text-gray-400 text-xs">
+© 2025 iHatePDF • Extreme Compression Engine
+</footer>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+
+const drop = document.getElementById("drop");
+const input = document.getElementById("input");
+const loading = document.getElementById("loading");
+const bar = document.getElementById("bar");
+const status = document.getElementById("status");
+const done = document.getElementById("done");
+const result = document.getElementById("result");
+const download = document.getElementById("download");
+
+drop.onclick = () => input.click();
+drop.ondragover = e => { e.preventDefault(); drop.classList.add("drag"); };
+drop.ondragleave = () => drop.classList.remove("drag");
+drop.ondrop = e => {
+  e.preventDefault();
+  input.files = e.dataTransfer.files;
+  input.dispatchEvent(new Event("change"));
+};
+
+input.onchange = async () => {
+  const file = input.files[0];
+  if (!file) return;
+
+  drop.classList.add("hidden");
+  loading.classList.remove("hidden");
+
+  const bytes = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+
+  const canvases = [];
+  const scale = 0.7;
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    status.textContent = `Rendering page ${i}/${pdf.numPages}…`;
+    bar.style.width = `${(i / pdf.numPages) * 40}%`;
+
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement("canvas");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    await page.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
+    canvases.push(canvas);
+  }
+
+  let quality = 0.6;
+  let finalBytes;
+
+  while (true) {
+    status.textContent = "Optimizing size…";
+    const pdfDoc = await PDFLib.PDFDocument.create();
+
+    for (const canvas of canvases) {
+      const jpg = canvas.toDataURL("image/jpeg", quality);
+      const imgBytes = await fetch(jpg).then(r => r.arrayBuffer());
+      const img = await pdfDoc.embedJpg(imgBytes);
+      const page = pdfDoc.addPage([img.width, img.height]);
+      page.drawImage(img, { x:0, y:0, width:img.width, height:img.height });
+    }
+
+    finalBytes = await pdfDoc.save();
+    if (finalBytes.length <= 999 * 1024 || quality <= 0.2) break;
+    quality -= 0.05;
+  }
+
+  const kb = n => (n/1024).toFixed(1);
+  result.innerHTML = `
+    Original: ${kb(file.size)} KB<br>
+    Final: ${kb(finalBytes.length)} KB
+  `;
+
+  const blob = new Blob([finalBytes], { type:"application/pdf" });
+  download.href = URL.createObjectURL(blob);
+  download.download = "compressed_999kb.pdf";
+
+  loading.classList.add("hidden");
+  done.classList.remove("hidden");
+};
+</script>
+
+</body>
+</html>
